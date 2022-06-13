@@ -1,0 +1,47 @@
+{
+    "root": true,
+    "env": {
+      "browser": true,
+      "node": true,
+      "amd": true
+    },
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "ecmaVersion": "latest"
+    },
+    "plugins": ["@typescript-eslint", "prettier"],
+    "extends": [
+      // "plugin:vue/essential",
+      "plugin:vue/vue3-recommended",
+      "eslint:recommended",
+      "@vue/typescript",
+      "@vue/typescript/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "globals": {
+      "__DEV__": true,
+      "ELEMENT_I18N_MAP": true
+    },
+    "rules": {
+      "no-undef": "off",
+      "no-var": "error",
+      "no-unused-vars": "off",
+      "no-prototype-builtins": "off",
+      "vue/multi-word-component-names": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "vue/no-v-html": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 120,
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  }
+  

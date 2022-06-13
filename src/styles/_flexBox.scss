@@ -1,0 +1,137 @@
+@mixin flexBox($direction, $alignItems, $justifyContent) {
+    display: flex;
+    flex-direction: $direction;
+    @if ($alignItems != null) {
+        align-items: $alignItems;
+    }
+    @if ($justifyContent != null) {
+        justify-content: $justifyContent;
+    }
+}
+
+@mixin boxSizing {
+    box-sizing: border-box;
+}
+
+@for $i from 0 through 24 {
+    .flex_#{$i} {
+        flex: $i;
+    }
+}
+
+@for $i from 1 through 20 {
+    [data-row-count="#{$i}"] {
+        .data_row {
+            width: calc(100% / #{$i});
+        }
+    }
+}
+
+@each $direction in 'right', 'left', 'top', 'bottom' {
+    @for $i from 0 through 4 {
+        .sp_#{$direction} {
+            margin-#{$direction}: 1rem;
+        }   
+    }
+}
+
+@for $i from 0 through 100 {
+    .w-#{$i * 5px} {
+        width: $i * 5px;
+    }
+}
+
+.flx {
+    @include boxSizing;
+    position: relative;
+    width: 100%;
+
+    &.horizontal {
+        @include flexBox(row, null, null);
+        
+        &.v_center {
+            @include flexBox(row, center, null);
+        }
+
+        &.v_center_end {
+            @include flexBox(row, center, flex-end);
+        }
+
+        &.h_center {
+            @include flexBox(row, flex-start, center);
+        }
+
+        &.h_end {
+            @include flexBox(row, flex-start, flex-end);
+        }
+
+        &.bottom_left {
+            @include flexBox(row, flex-end, null);
+        }
+
+        &.bottom_center {
+            @include flexBox(row, flex-end, center);
+        }
+
+        &.bottom_right {
+            @include flexBox(row, flex-end, flex-end);
+        }
+
+        &.stretch {
+            align-items: stretch;
+        }
+    }
+
+    &.vertical {
+        @include flexBox(column, null, null);
+        
+        &.v_center {
+            @include flexBox(column, null, center);
+        }
+
+        &.h_center {
+            @include flexBox(column, center, null);
+        }
+
+        &.h_end {
+            @include flexBox(column, flex-end, null);
+        }
+
+        &.bottom_left {
+            @include flexBox(column, null, flex-end);
+        }
+
+        &.bottom_center {
+            @include flexBox(column, center, flex-end);
+        }
+
+        &.bottom_right {
+            @include flexBox(column, flex-end, flex-end);
+        }
+    }
+
+    &.space_between {
+        justify-content: space-between;
+    }
+
+    &.space_around {
+        justify-content: space-around;
+    }
+
+    &.space_evenly {
+        justify-content: space-evenly;
+    }
+
+    &.center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.grow {
+        height: 100%;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+}

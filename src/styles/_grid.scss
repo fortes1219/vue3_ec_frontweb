@@ -1,0 +1,99 @@
+@mixin grid($rowStart, $rowEnd, $colStart, $colEnd) {
+    grid-row-start: $rowStart;
+    grid-row-end: $rowEnd;
+    grid-column-start: $colStart;
+    grid-column-end: $colEnd;
+}
+
+@mixin grid-temp-area($val...) {
+    grid-template-areas: $val;
+}
+
+@mixin grid-area($val...) {
+    grid-area: $val;
+}
+
+@mixin grid-temp-colums($arg...) {
+    grid-template-columns: $arg;
+}
+
+@mixin grid-temp-rows($arg...) {
+    grid-template-rows: $arg;
+}
+
+@mixin grid-row($start, $end) {
+    grid-row: #{$start} / #{$end};
+}
+
+@mixin grid-col($start, $end) {
+    grid-column: #{$start} / #{$end};
+}
+
+@mixin grid-auto-rows($size) {
+    grid-auto-rows: $size;
+}
+
+@mixin grid-auto-colums($size) {
+    grid-auto-columns: $size;
+}
+
+.grid {
+    display: grid;
+    @for $i from 1 through 24 {
+        &.rs-#{$i} {
+            grid-row-start: $i;
+        }
+        &.re-#{$i} {
+            grid-row-end: $i;
+        }
+        &.cs-#{$i} {
+            grid-column-start: $i;
+        }
+        &.ce-#{$i} {
+            grid-column-end: $i;
+        }
+    }
+
+    &.col-1 {
+        grid-template-columns: auto;
+    }
+    &.col-2 {
+        grid-template-columns: auto auto;
+    }
+    &.col-3 {
+        grid-template-columns: auto auto auto;
+    }
+    &.col-4 {
+        grid-template-columns: auto auto auto auto;
+    }
+    &.col-5 {
+        grid-template-columns: auto auto auto auto auto;
+    }
+    
+    @for $i from 0 through 30 {
+        &.gap-#{$i} {
+            grid-gap: #{$i}px;
+        }
+    }
+    @for $i from 0 through 120 {
+        &.auto-col-#{$i * 5} {
+            @include grid-auto-colums(minmax(#{$i * 5px}, auto))
+        }
+
+        &.auto-rows-#{$i * 5} {
+            @include grid-auto-rows(minmax(#{$i * 5px}, auto))
+        }
+    }
+}
+
+@for $i from 0 through 10 {
+    @for $j from 0 through 10 {
+        .row-#{$i}-#{$j} {
+            @include grid-row($i, $j)
+        }
+
+        .col-#{$i}-#{$j} {
+            @include grid-col($i, $j)
+        }
+    }
+}

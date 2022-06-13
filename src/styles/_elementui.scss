@@ -1,0 +1,404 @@
+$bg-color: (
+    default     : #ffffff,
+    primary     : #a1e3e5,
+    secondary   : #38a7be,
+    accent      : #be3838,
+    strong      : #fbf9fa,
+    warning     : #b58d46,
+    light       : #ccc,
+    lighter     : #eff1f3,
+    weak        : #f2f4f9,
+    weaker      : #f5f7fa,
+    weakest     : #f9fafc,
+    heavy       : #0f647f,
+    login       : #F15A24,
+    logout      : #da2428,
+    search      : #ED1C4B,
+    reset       : #333,
+    dark        : #333,
+    deep_dark   : #1A1A1A,
+    confirm     : #F15A24,
+    remove      : #ED1C24
+);
+@function bg-color($name) {
+    @return map-get($bg-color, $name);
+}
+
+$text-color: (
+    default         : #000000,
+    primary         : #56636f,
+    secondary       : #858c96,
+    success         : #00a573,
+    accent          : #f48720,
+    strong          : #da2428,
+    warning         : #b58d46,
+    weak            : #9aaab9,
+    info            : #00a7be,
+    logout          : #da2428,
+    light           : #cadee3,
+    heavy           : #0f647f,
+    gray_default    : #999,
+    gray_light      : #ccc,
+    default_invert  : #ffffff
+);
+@function text-color($name) {
+    @return map-get($text-color, $name);
+}
+@each $status, $color in $text-color {
+    .u_color--#{$status} {
+        color: $color;
+    }
+}
+
+$border-color: (
+    default         : #e4e9ed,
+    primary         : #a1e3e5,
+    secondary       : #38a7be,
+    default_invert  : #ffffff
+);
+@function border-color($name) {
+    @return map-get($border-color, $name);
+}
+
+$shadow-color: (
+    default : rgba(0, 0, 0, 0.15),
+    dark    : rgba(0, 0, 0, 0.2),
+    light   : rgba(0, 0, 0, 0.075)
+);
+@function shadow-color($name) {
+    @return map-get($shadow-color, $name);
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+.el-table {
+    border-radius: border-radius(default);
+    color: text-color(primary);
+    font-size: font-size(mini);
+    transition: all 0.5s ease-in-out;
+
+    /*定義滾動條高寬及背景 高寬分別對應橫豎滾動條的尺寸*/
+    // *::-webkit-scrollbar {
+    //     background-color: transparent;
+    //     opacity: 0.3;
+    // }
+
+    /*定義滾動條軌道 內陰影+圓角*/
+    // *::-webkit-scrollbar-track {
+    //     background-color: transparent;
+    // }
+
+    /*定義滑塊 內陰影+圓角*/
+    *::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    .el-table__body-wrapper {
+        &::-webkit-scrollbar {
+            display: block;
+        }
+    }
+
+    /*定義滾動條高寬及背景 高寬分別對應橫豎滾動條的尺寸*/
+    *::-webkit-scrollbar {
+        opacity: 0.3;
+    }
+
+    /*定義滑塊 內陰影+圓角*/
+    *::-webkit-scrollbar-thumb {
+        background: rgba(112, 150, 160, 0.3);
+        border-radius: 8px;
+        border: 1px solid rgba(82, 255, 200, 0.3);
+
+        &:hover {
+            background: rgba(112, 150, 160, 0.6);
+        }
+    }
+
+    .el-table__body-wrapper {
+        &::-webkit-scrollbar {
+            display: block;
+        }
+    }
+}
+
+.el-customize {
+    .el-table {
+        background: rgba(0, 0, 0, 0.2);
+        tr, th.el-table__cell {
+            background-color: transparent;
+            border: none;
+            .is-leaf {
+                border-bottom: none !important;
+            }
+        }
+        .el-table__body {
+            color: text-color(light);
+
+            td.el-table__cell {
+                border: none;
+            }
+        }
+    }
+    .el-table__footer-wrapper {
+        & td {
+            border-top-color: rgb(209, 209, 209);
+        }
+
+        & tbody td {
+            background-color: rgb(238, 238, 238);
+            transition: background-color .25s ease;
+            color: rgb(119, 119, 119);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+    }
+    
+
+    .el-table__inner-wrapper::before {
+        border-color: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .el-table__footer-wrapper tbody tr:hover > td {
+        background-color: rgb(247, 247, 247);
+        color: rgb(160, 160, 160);
+    }
+
+    .el-table--enable-row-hover .el-table__body tr{
+        &:nth-child(odd) {
+            background: rgba(242,242,242,0.1);
+        }
+        &:nth-child(even) {
+            background: rgba(242,242,242,0.2);
+        }
+    }
+
+    .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+        background: rgba(242,242,242,0.25);
+    }
+}
+
+@mixin elColor($color) {
+    .el-form-item__label {
+        color: $color;
+    }
+
+    .el-range-separator {
+        color: $color;
+    }
+    
+    .el-date-editor .el-range-separator {
+        color: $color;
+    }
+
+    .el-date-editor .el-range-input {
+        color: $color;
+    }
+}
+
+@mixin elButton {
+    $el-btn-plain-component: (
+        logout: (
+            class: 'logout',
+            color: lighten(text-color(logout), 5%),
+            colorHover: text-color(light),
+            bgColor: transparent,
+            bgColorHover: bg-color(logout),
+            borderColor: lighten(text-color(logout), 5%),
+            borderColorHover: text-color(logout),
+        ),
+        action: (
+            class: 'action',
+            color: lighten(text-color(heavy), 5%),
+            colorHover: text-color(light),
+            bgColor: transparent,
+            bgColorHover: bg-color(heavy),
+            borderColor: lighten(text-color(heavy), 5%),
+            borderColorHover: text-color(heavy),
+        ),
+        cancel: (
+            class: 'cancel',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: rgba(0, 0, 0, 0),
+            bgColorHover: rgba(0, 0, 0, 0.15),
+            borderColor: lighten(text-color(gray_light), 5%),
+            borderColorHover: text-color(gray_light),
+        ),
+    );
+    $el-btn-component: (
+        reset: (
+            class: 'reset',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(reset),
+            bgColorHover: lighten(bg-color(reset), 5%),
+        ),
+        search: (
+            class: 'search',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(search),
+            bgColorHover: lighten(bg-color(search), 5%),
+        ),
+        dark: (
+            class: 'dark',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(dark),
+            bgColorHover: lighten(bg-color(dark), 5%),
+            radius: 60px,
+        ),
+        deepDark: (
+            class: 'deep_dark',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(deep_dark),
+            bgColorHover: lighten(bg-color(deep_dark), 5%),
+            radius: 60px,
+        ),
+        remove: (
+            class: 'remove',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(remove),
+            bgColorHover: lighten(bg-color(remove), 5%),
+            radius: 60px,
+        ),
+        confirm: (
+            class: 'confirm',
+            color: lighten(text-color(gray_light), 5%),
+            colorHover: text-color(gray_light),
+            bgColor: bg-color(confirm),
+            bgColorHover: lighten(bg-color(confirm), 5%),
+        )
+    );
+
+    @each $name, $value in $el-btn-component {
+        $class: map-get($value, class);
+        $color: map-get($value, color);
+        $colorHover: map-get($value, colorHover);
+        $bgColor: map-get($value, bgColor);
+        $bgColorHover: map-get($value, bgColorHover);
+        $radius: map-get($value, radius);
+        .el-button {
+            &.#{$class} {
+                &:not(.is-text,.is-link,.el-button--text):focus {
+                    color: $color;
+                    background-color: $bgColor;
+                }
+                border: none;
+                color: $color;
+                background-color: $bgColor;
+                border-radius: $radius;
+                &:hover {
+                    color: $colorHover;
+                    background-color: $bgColorHover;
+                }
+            }
+        }
+    }
+
+    @each $name, $value in $el-btn-plain-component {
+        $class: map-get($value, class);
+        $color: map-get($value, color);
+        $colorHover: map-get($value, colorHover);
+        $bgColor: map-get($value, bgColor);
+        $bgColorHover: map-get($value, bgColorHover);
+        $borderColor: map-get($value, borderColor);
+        $borderColorHover: map-get($value, borderColorHover);
+        $radius: map-get($value, radius);
+        .el-button {
+            &.is-plain {
+                &.#{$class} {
+                    &:not(.is-text,.is-link,.el-button--text):focus {
+                        color: $color;
+                        background-color: $bgColor;
+                        background: $bgColor;
+                    }
+                    color: $color;
+                    background-color: $bgColor;
+                    background: $bgColor;
+                    border-radius: $radius;
+                    border-color: $borderColor;
+                    &:hover {
+                        color: $colorHover;
+                        background-color: $bgColorHover;
+                        background: $bgColorHover;
+                        border-color: $borderColorHover;
+                    }
+                }
+            }
+        }
+    }
+
+    .el-button.is-disabled,
+    .el-button.is-disabled:focus,
+    .el-button.is-disabled:hover {
+        background-color: #999;
+        opacity: 0.4;
+    }
+}
+
+@mixin elInput {
+    .el-input {
+        border-color: #4d4d4d;
+        color: #ccc;
+    }
+    .el-input__wrapper,
+    .el-textarea__inner {
+        background-color: rgba(0,0,0,0.3);
+        box-shadow: 0 0 0 1px #4d4d4d inset !important;
+        color: #ccc;
+    }
+    .el-input__inner {
+        color: #ccc;
+    }
+    .el-select {
+        .el-input {
+            &.is-focus {
+                .el-input__wrapper {
+                    box-shadow: 0 0 0 1px #ccc inset !important;
+                }
+            }
+        }
+    }
+    .el-radio-button {
+        .el-radio-button__inner {
+            background-color: bg-color(deep_dark);
+            border-color: bg-color(deep_dark);
+            border-left: none !important;
+            color: text-color(gray_light);
+        }
+        .el-radio-button__original-radio:checked+.el-radio-button__inner {
+            background-color: bg-color(confirm);
+            border-color: bg-color(confirm);
+            box-shadow: none;
+        }
+    }
+}
+
+::placeholder,
+::-webkit-input-placeholder {
+    color: #666 !important;
+    opacity: 1;
+}
+
+.el-customize {
+    @include elButton;
+}
